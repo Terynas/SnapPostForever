@@ -1,0 +1,12 @@
+.DS_Store
+*.swp
+*~
+*.bak
+.luarc.json
+.vscode/
+.idea/
+dist/
+*.zip
+
+# Local maintainer Cursor rule (do not publish)
+.cursor/rules/git-author-policy.mdc

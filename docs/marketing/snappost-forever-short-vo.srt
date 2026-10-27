@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:02,800
+Stop mailing mats to the wrong alt
+
+2
+00:00:02,800 --> 00:00:07,200
+SnapPost Forever maps every reagent → right character
+
+3
+00:00:07,200 --> 00:00:11,500
+Safe mailbox queue. One click.
+
+4
+00:00:11,500 --> 00:00:14,800
+Forever + Midnight
+
+5
+00:00:14,800 --> 00:00:19,000
+Scan. Map. Send. — CurseForge

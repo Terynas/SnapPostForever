@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: First Timers (learn addon development)
+    url: https://github.com/Terynas/First-Timers
+    about: Guides and starter addon — not for SnapPost Forever support PRs.

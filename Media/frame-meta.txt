@@ -1,0 +1,7 @@
+corner=96
+edge=36
+ui_corner=52
+ui_edge=32
+source=openart nano-banana-2
+stone_hist=TxlaFqxTHkj8L3ZCGMdE
+frame_hist=nVuYwbnzZzE9GPsZysf6

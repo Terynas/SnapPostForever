@@ -1,0 +1,13 @@
+---
+description: Security and performance gates for SnapPost Forever Lua/TOC
+globs: "**/*.{lua,toc,xml}"
+alwaysApply: false
+---
+
+# SnapPost Forever AI gates
+
+Follow `AGENTS.md`. Security/performance details: parent `First Timers/06-notes/addon-dev/` when present.
+
+- No `loadstring` on untrusted data; Blizzard hooks via `hooksecurefunc` / `HookScript`
+- Events / `C_Timer` over bare `OnUpdate`; frame pools; mail sends opt-in + rate-limited
+- Forever `16001` ≠ Classic Era

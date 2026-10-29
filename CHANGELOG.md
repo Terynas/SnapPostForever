@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Classic Era (1.15.x) support. The addon now loads on Classic Era with the same vanilla material catalog and profession list as WoW Forever, normal realm-style character names, and professions read from the Skills tab.
 - GitHub-facing docs and policy: polished README + banner, `AGENTS.md` / multi-tool AI loaders, `SECURITY.md`, issue/PR templates, and maintainer git hooks that require interactive push confirmation. Store description updated for Forever + Midnight dual-ship.
 
 ## [0.2.19] - 2026-10-25

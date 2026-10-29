@@ -115,6 +115,35 @@ local function ScanViaTradeSkillUI(professions)
     return found
 end
 
+--- Classic Era (and Forever's classic skill tab): professions are plain skill lines.
+--- Lines under a collapsed Skills header are not returned; the last good scan is kept.
+local function ScanViaSkillLines(professions)
+    local getNum = (C_SkillInfo and C_SkillInfo.GetNumSkillLines) or GetNumSkillLines
+    local getInfo = (C_SkillInfo and C_SkillInfo.GetSkillLineInfo) or GetSkillLineInfo
+    if type(getNum) ~= "function" or type(getInfo) ~= "function" then
+        return false
+    end
+    local n = getNum()
+    if type(n) ~= "number" or n <= 0 then
+        return false
+    end
+    local found = false
+    for i = 1, n do
+        local name, isHeader, _, rank = getInfo(i)
+        if type(name) == "table" then
+            local info = name
+            isHeader = info.header or info.isHeader
+            name = info.name or info.skillName
+            rank = info.rank or info.skillRank or info.skillLevel
+        end
+        if name and not isHeader and ResolveProfessionKey(name) then
+            AddProfession(professions, name, rank)
+            found = true
+        end
+    end
+    return found
+end
+
 function CharDB:ScanPlayer()
     local fullName, firstName, surname = ns.PlayerFullName()
     local realm = GetNormalizedRealmName() or GetRealmName()
@@ -134,8 +163,8 @@ function CharDB:ScanPlayer()
     local mailName = fullName
 
     local professions = {}
-    if not ScanViaGetProfessions(professions) then
-        ScanViaTradeSkillUI(professions)
+    if not ScanViaGetProfessions(professions) and not ScanViaTradeSkillUI(professions) then
+        ScanViaSkillLines(professions)
     end
 
     local prev = ns.db.chars[key]

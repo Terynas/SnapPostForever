@@ -10,24 +10,31 @@ ns.MaterialById = ns.MaterialById or {}
 local frame = CreateFrame("Frame")
 ns.eventFrame = frame
 
---- Forever (Camelot) vs Mainline/Midnight (standard). Detect before Data/*.lua runs.
+--- Forever (Camelot), Classic Era (vanilla) or Mainline/Midnight (standard).
+--- Detect before Data/*.lua runs. Era shares Forever's vanilla data packs but
+--- keeps realm-style names (no surnames).
 local function DetectClientFlavor()
+    local iface = select(4, GetBuildInfo())
+    ns.isForever, ns.isEra = false, false
     if WOW_PROJECT_CAMELOT and WOW_PROJECT_ID == WOW_PROJECT_CAMELOT then
         ns.isForever = true
+    elseif WOW_PROJECT_CLASSIC and WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+        ns.isEra = true
     elseif WOW_PROJECT_MAINLINE and WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
         ns.isForever = false
-    else
-        local iface = select(4, GetBuildInfo())
-        ns.isForever = type(iface) == "number" and iface > 16000 and iface < 20000
+    elseif type(iface) == "number" then
+        ns.isForever = iface > 16000 and iface < 20000
+        ns.isEra = iface > 11000 and iface < 20000 and not ns.isForever
     end
-    ns.isMainline = not ns.isForever
-    ns.clientFlavor = ns.isForever and "forever" or "mainline"
+    ns.usesVanillaData = ns.isForever or ns.isEra
+    ns.isMainline = not ns.usesVanillaData
+    ns.clientFlavor = (ns.isForever and "forever") or (ns.isEra and "era") or "mainline"
 end
 
 DetectClientFlavor()
 
 function ns.ApplyClientFlavor()
-    local key = ns.isForever and "forever" or "mainline"
+    local key = ns.clientFlavor
     local expansions = ns.ExpansionsByFlavor and ns.ExpansionsByFlavor[key]
     local professions = ns.ProfessionsByFlavor and ns.ProfessionsByFlavor[key]
     if expansions then
@@ -338,9 +345,9 @@ function ns.LearnUsesFromProfessionMaster()
     return added
 end
 
---- pack: "forever" | "mainline" — skip registration on the other client.
+--- pack: "forever" (vanilla mats, Forever + Classic Era) | "mainline" — skip registration on the other client.
 function ns.RegisterMaterials(list, pack)
-    if pack == "forever" and not ns.isForever then
+    if pack == "forever" and not ns.usesVanillaData then
         return
     end
     if pack == "mainline" and not ns.isMainline then
@@ -373,7 +380,7 @@ function frame:ADDON_LOADED(loaded)
         ns.db.minimap = ns.db.minimap or {}
         ns.db.minimap.hide = true
     end
-    local flavorLabel = ns.isForever and "WoW Forever" or "Midnight / Mainline"
+    local flavorLabel = (ns.isForever and "WoW Forever") or (ns.isEra and "Classic Era") or "Midnight / Mainline"
     ns.Print(
         "v%s loaded for %s (%d mats). |cffffffff/spostf|r mapper · |cffffffff/spostf options|r.",
         ns.version,

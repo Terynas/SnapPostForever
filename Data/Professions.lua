@@ -1,6 +1,6 @@
 local _, ns = ...
 
--- Forever: Vanilla set (First Aid, no JC / Inscription).
+-- Forever and Classic Era: Vanilla set (First Aid, no JC / Inscription).
 ns.ProfessionsByFlavor = {
     forever = {
         { key = "Alchemy",        label = "Alchemy",         kind = "craft" },
@@ -32,6 +32,8 @@ ns.ProfessionsByFlavor = {
         { key = "Fishing",        label = "Fishing",         kind = "secondary" },
     },
 }
+
+ns.ProfessionsByFlavor.era = ns.ProfessionsByFlavor.forever
 
 ns.ProfessionAliases = {
     alchemy = "Alchemy",

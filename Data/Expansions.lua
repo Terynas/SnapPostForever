@@ -5,6 +5,9 @@ ns.ExpansionsByFlavor = {
     forever = {
         { key = "Classic", label = "WoW Forever (Classic)", order = 1 },
     },
+    era = {
+        { key = "Classic", label = "Classic Era", order = 1 },
+    },
     mainline = {
         { key = "Classic",  label = "Classic",           order = 1 },
         { key = "TBC",      label = "The Burning Crusade", order = 2 },

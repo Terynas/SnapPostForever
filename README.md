@@ -4,11 +4,12 @@
 
 <p align="center">
   <b>Map profession materials across your alts and mail them with safe delays.</b><br>
-  One dual-ship addon for <b>WoW Forever</b> and <b>Midnight / Mainline</b>.
+  One addon for <b>WoW Forever</b>, <b>Classic Era</b> and <b>Midnight / Mainline</b>.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/WoW%20Forever-Interface%2016001-d6a64a?style=flat-square" alt="WoW Forever: Interface 16001">
+  <img src="https://img.shields.io/badge/Classic%20Era-Interface%2011509-d6a64a?style=flat-square" alt="Classic Era: Interface 11509">
   <img src="https://img.shields.io/badge/Midnight-Interface%20120105%20%7C%20120107-d6a64a?style=flat-square" alt="Midnight: Interface 120105 and 120107">
   <img src="https://img.shields.io/badge/Lua-5.1-2c2d72?style=flat-square&logo=lua" alt="Lua 5.1">
   <img src="https://img.shields.io/badge/license-ARR-6b6b6b?style=flat-square" alt="All Rights Reserved">
@@ -45,26 +46,30 @@ Also accepts `/snappostf` and `/snappost`.
 ## Install
 
 1. Install from CurseForge (when published) or copy this folder into `Interface/AddOns/SnapPostForever`.
-2. Clients: Forever `_classic_beta_`, Midnight `_retail_` / `_ptr_`.
+2. Clients: Forever `_forever_`, Classic Era `_classic_era_`, Midnight `_retail_` / `_ptr_`.
 3. **Full client restart** after adding the addon or changing the `.toc`.
 4. Log each alt → `/spostf scan` → map materials → open mailbox → Send.
 
-TOC: `## Interface: 16001, 120105, 120107` · `AllowLoadGameType: forever, standard`.
+TOC: `## Interface: 11509, 16001, 120105, 120107` · `AllowLoadGameType: forever, standard, vanilla`.
 
 Maintainer deploy / package (WoWAddons workspace):
 
 ```bash
-./scripts/deploy_snappost_forever.sh
+./scripts/deploy_snappost_forever.sh              # every installed client
+./scripts/deploy_snappost_forever.sh --watch era  # Classic Era only, redeploy on save, then /reload
 ./scripts/package_snappost_forever.sh   # → dist/SnapPostForever-<version>.zip
 ```
 
 ## Client differences
 
-| | Forever | Midnight / Mainline |
-|--|---------|---------------------|
-| Materials | Classic Forever pack | Catalog + DF + TWW + Midnight |
-| Expansions | Classic | Classic → Midnight |
-| Professions | Vanilla + First Aid | Retail set (JC / Inscription; no First Aid) |
+| | Forever | Classic Era | Midnight / Mainline |
+|--|---------|-------------|---------------------|
+| Materials | Classic Forever pack | Classic Forever pack | Catalog + DF + TWW + Midnight |
+| Expansions | Classic | Classic | Classic → Midnight |
+| Professions | Vanilla + First Aid | Vanilla + First Aid | Retail set (JC / Inscription; no First Aid) |
+| Names | First + surname | Name-Realm | Name-Realm |
+
+On Classic Era, professions are read from the Skills tab; keep its Professions and Secondary Skills headers expanded when you run `/spostf scan`.
 
 ## Documentation
 

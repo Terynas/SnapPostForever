@@ -1,7 +1,7 @@
-## Interface: 16001, 120105, 120107
+## Interface: 11509, 16001, 120105, 120107
 ## Title: SnapPost Forever
 ## Title-Mainline: SnapPost
-## Notes: Map profession materials across your characters and queue mailbox sends with safe delays (Forever + Midnight).
+## Notes: Map profession materials across your characters and queue mailbox sends with safe delays (Forever, Classic Era + Midnight).
 ## Notes-Mainline: Map profession materials across your Battle.net characters and queue mailbox sends with safe delays.
 ## Author: Terynas
 ## Version: 0.2.19
@@ -9,8 +9,7 @@
 ## IconTexture: Interface\Icons\INV_Letter_15
 ## Category: Mail
 ## DefaultState: enabled
-## AllowLoadGameType: forever, standard
-## ExcludeLoadGameType: classic
+## AllowLoadGameType: forever, standard, vanilla
 
 Core.lua
 Config.lua

@@ -1,19 +1,9 @@
-<p align="center">
-  <img src=".github/banner.jpg" alt="SnapPost Forever — Forever & Midnight" width="100%">
-</p>
+![SnapPost Forever — Forever & Midnight](.github/banner.jpg)
 
-<p align="center">
-  <b>Map profession materials across your alts and mail them with safe delays.</b><br>
-  One addon for <b>WoW Forever</b>, <b>Classic Era</b> and <b>Midnight / Mainline</b>.
-</p>
+**Map profession materials across your alts and mail them with safe delays.**  
+One addon for **WoW Forever**, **Classic Era** and **Midnight / Mainline**.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/WoW%20Forever-Interface%2016001-d6a64a?style=flat-square" alt="WoW Forever: Interface 16001">
-  <img src="https://img.shields.io/badge/Classic%20Era-Interface%2011509-d6a64a?style=flat-square" alt="Classic Era: Interface 11509">
-  <img src="https://img.shields.io/badge/Midnight-Interface%20120105%20%7C%20120107-d6a64a?style=flat-square" alt="Midnight: Interface 120105 and 120107">
-  <img src="https://img.shields.io/badge/Lua-5.1-2c2d72?style=flat-square&logo=lua" alt="Lua 5.1">
-  <img src="https://img.shields.io/badge/license-ARR-6b6b6b?style=flat-square" alt="All Rights Reserved">
-</p>
+![WoW Forever: Interface 16001](https://img.shields.io/badge/WoW%20Forever-Interface%2016001-d6a64a?style=flat-square)![Classic Era: Interface 11509](https://img.shields.io/badge/Classic%20Era-Interface%2011509-d6a64a?style=flat-square)![Midnight: Interface 120105 and 120107](https://img.shields.io/badge/Midnight-Interface%20120105%20%7C%20120107-d6a64a?style=flat-square)![Lua 5.1](https://img.shields.io/badge/Lua-5.1-2c2d72?style=flat-square&logo=lua)![All Rights Reserved](https://img.shields.io/badge/license-ARR-6b6b6b?style=flat-square)
 
 ---
 
@@ -29,17 +19,17 @@ SavedVariables: `SnapPostForeverDB` (does not share maps with any legacy `SnapPo
 
 ## Commands
 
-| Command | Action |
-|---------|--------|
-| `/spostf` | Open mapper |
-| `/spostf options` | Options → AddOns |
-| `/spostf minimap` | Show / hide minimap icon |
-| `/spostf de <Char-Realm>` | DE greens target (`clear` to remove) |
-| `/spostf scan` | Save this character’s professions |
-| `/spostf bags` | Mail plan (mailbox open to send) |
-| `/spostf delay N` | Seconds between sends |
-| `/spostf reset` | Clear maps (keeps scanned characters) |
-| `/spostf setmail Char-Realm - Name` | Exact mailbox **To** text |
+| Command                             | Action                                |
+| ----------------------------------- | ------------------------------------- |
+| `/spostf`                           | Open mapper with the options          |
+| `/spostf options`                   | Options → AddOns                      |
+| `/spostf minimap`                   | Show / hide minimap icon              |
+| `/spostf de <Char-Realm>`           | DE greens target (`clear` to remove)  |
+| `/spostf scan`                      | Save this character’s professions     |
+| `/spostf bags`                      | Mail plan (mailbox open to send)      |
+| `/spostf delay N`                   | Seconds between sends                 |
+| `/spostf reset`                     | Clear maps (keeps scanned characters) |
+| `/spostf setmail Char-Realm - Name` | Exact mailbox **To** text             |
 
 Also accepts `/snappostf` and `/snappost`.
 

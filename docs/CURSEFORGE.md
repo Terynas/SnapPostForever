@@ -182,10 +182,16 @@ This repo already has:
 
 Gallery screenshots stay in `docs/screenshots/` and are uploaded **once** on the CurseForge Media tab — they are not part of the auto zip.
 
+### Do not use a GitHub → CurseForge webhook
+
+The Author Portal “package webhook” URL is **not** how WoW addons auto-publish with BigWigs Packager. A `push` webhook will not build your zip or replace the Actions upload. If you added one under GitHub → Settings → Webhooks, delete it. Use `CF_API_KEY` + this workflow instead.
+
+Also set **GitHub → Settings → Actions → General → Workflow permissions** to **Read and write** (or keep Read and rely on this workflow’s `permissions: contents: write`). Without write, the packager cannot attach a GitHub Release even if CurseForge upload works.
+
 ### One-time setup (you do this in the browsers)
 
-1. **Create the CurseForge project** (Author Portal) if it does not exist yet — §3 above. Note the numeric **Project ID** from the project URL or project settings.
-2. **Create an API token** at [authors.curseforge.com](https://authors.curseforge.com/) → Account → API tokens. Copy it once; you will not see it again.
+1. **Create the CurseForge project** (Author Portal) if it does not exist yet — §3 above. Note the numeric **Project ID** from the project URL or project settings (digits only, e.g. `1753123` — no letter suffix).
+2. **Create an API token** at [authors.curseforge.com](https://authors.curseforge.com/) → Account → API tokens. Copy it once; you will not see it again. Prefer the account **API Token** used by BigWigs Packager (`CF_API_KEY`), not a webhook query-string token.
 3. **Push SnapPostForever as its own GitHub repo** (or ensure this folder is the repo root). The workflow must live at the addon repo root next to `.pkgmeta` and the `.toc`.
 4. On that GitHub repo: **Settings → Secrets and variables → Actions → New repository secret**
    - Name: `CF_API_KEY`
@@ -194,10 +200,10 @@ Gallery screenshots stay in `docs/screenshots/` and are uploaded **once** on the
 5. Add the project id to the TOC (packager reads this):
 
 ```toc
-## X-Curse-Project-ID: 1234567
+## X-Curse-Project-ID: 1753123
 ```
 
-Replace `1234567` with your real CurseForge project id. Optional but useful:
+Digits only. Optional but useful:
 
 ```toc
 ## Version: @project-version@

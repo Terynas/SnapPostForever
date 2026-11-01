@@ -1,5 +1,5 @@
-# Push a version tag → BigWigs Packager builds the zip and uploads to CurseForge.
-# Prerequisites (once): CurseForge project + API token + TOC X-Curse-Project-ID.
+# Tag push → BigWigs Packager → CurseForge Upload API.
+# Do NOT use a GitHub→CurseForge webhook for this; CF_API_KEY uploads outbound.
 # See docs/CURSEFORGE.md § "GitHub → CurseForge automation".
 name: Release
 
@@ -7,6 +7,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -19,8 +20,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Require CurseForge project id
+        run: |
+          id="$(grep -E '^## X-Curse-Project-ID:' SnapPostForever.toc | awk '{print $3}')"
+          echo "X-Curse-Project-ID=${id}"
+          if [[ -z "${id}" || ! "${id}" =~ ^[0-9]+$ ]]; then
+            echo "TOC X-Curse-Project-ID must be digits only (got: '${id}')" >&2
+            exit 1
+          fi
+
       - name: Package and upload
         uses: BigWigsMods/packager@v2
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

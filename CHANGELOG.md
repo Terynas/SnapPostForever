@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - GitHub-facing docs and policy: polished README + banner, `AGENTS.md` / multi-tool AI loaders, `SECURITY.md`, issue/PR templates, and maintainer git hooks that require interactive push confirmation. Store description updated for Forever + Midnight dual-ship.
 - CurseForge gallery screenshots refreshed (`docs/screenshots/04`–`06`) with Classic Era mail prompt, mapper, and Options captures.
 - BigWigs Packager kit: `.pkgmeta` + `.github/workflows/release.yml` so a `v*` tag can build the zip and upload to CurseForge; setup steps in `docs/CURSEFORGE.md`.
+- CurseForge project id in TOC is digits-only (`1753123`). Do not use a GitHub→CurseForge package webhook for releases.
 
 ## [0.2.19] - 2026-10-25
 

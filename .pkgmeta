@@ -1,0 +1,19 @@
+# BigWigs Packager metadata — used by GitHub Actions on tag push.
+# https://github.com/BigWigsMods/packager
+package-as: SnapPostForever
+
+manual-changelog: CHANGELOG.md
+
+ignore:
+  - .github
+  - .continue
+  - .githooks
+  - docs
+  - "*.zip"
+  - "*.bak"
+  - .DS_Store
+  - AGENTS.md
+  - CLAUDE.md
+  - GEMINI.md
+  - CONTRIBUTING.md
+  - SECURITY.md

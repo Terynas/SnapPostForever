@@ -10,6 +10,7 @@
 ## Category: Mail
 ## DefaultState: enabled
 ## AllowLoadGameType: forever, standard, vanilla
+## X-Curse-Project-ID: 1753123S
 
 Core.lua
 Config.lua

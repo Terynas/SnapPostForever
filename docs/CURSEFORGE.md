@@ -149,15 +149,17 @@ Moderation can take hours to a few days. Respond politely in Author messages if 
 
 ---
 
-## 7. Recurring release workflow
+## 7. Recurring release workflow (manual)
 
-1. Ship code + update root `CHANGELOG.md` under `[Unreleased]`, then move bullets into a dated section when you cut a version.
-2. Bump `## Version` in `SnapPostForever.toc`.
-3. `./scripts/package_snappost_forever.sh`
-4. Upload zip on CurseForge with Forever flavor + changelog.
-5. Optionally automate later with the Upload API + `X-API-TOKEN` (see support article above). Keep tokens out of git.
+1. Ship code + update `CHANGELOG.md` under `[Unreleased]`, then move bullets into a dated section when you cut a version.
+2. Bump `## Version` in `SnapPostForever.toc` (or let the packager fill `@project-version@` if you switch to that).
+3. Either:
+   - **Manual:** `./scripts/package_snappost_forever.sh` from the WoWAddons workspace root → upload `dist/SnapPostForever-<version>.zip` on CurseForge, **or**
+   - **Automatic:** push a `v*` tag (see §8).
+4. Tag flavors Forever + Classic Era + Retail/Midnight as appropriate.
+5. Keep tokens out of git.
 
-Local Forever testing still uses:
+Local testing still uses:
 
 ```bash
 ./scripts/deploy_snappost_forever.sh
@@ -165,23 +167,94 @@ Local Forever testing still uses:
 
 ---
 
-## 8. Assets ready in this repo
+## 8. GitHub → CurseForge automation (BigWigs Packager)
+
+CurseForge does **not** pull your repo by itself. The standard pattern is:
+
+**GitHub tag → GitHub Actions → [BigWigs Packager](https://github.com/BigWigsMods/packager) → CurseForge Upload API**
+
+This repo already has:
+
+| File | Role |
+|------|------|
+| [`.pkgmeta`](../.pkgmeta) | What to ship / ignore (`docs/` stays out of the zip) |
+| [`.github/workflows/release.yml`](../.github/workflows/release.yml) | Runs the packager on `v*` tags |
+
+Gallery screenshots stay in `docs/screenshots/` and are uploaded **once** on the CurseForge Media tab — they are not part of the auto zip.
+
+### One-time setup (you do this in the browsers)
+
+1. **Create the CurseForge project** (Author Portal) if it does not exist yet — §3 above. Note the numeric **Project ID** from the project URL or project settings.
+2. **Create an API token** at [authors.curseforge.com](https://authors.curseforge.com/) → Account → API tokens. Copy it once; you will not see it again.
+3. **Push SnapPostForever as its own GitHub repo** (or ensure this folder is the repo root). The workflow must live at the addon repo root next to `.pkgmeta` and the `.toc`.
+4. On that GitHub repo: **Settings → Secrets and variables → Actions → New repository secret**
+   - Name: `CF_API_KEY`
+   - Value: the CurseForge API token  
+   Never commit the token.
+5. Add the project id to the TOC (packager reads this):
+
+```toc
+## X-Curse-Project-ID: 1234567
+```
+
+Replace `1234567` with your real CurseForge project id. Optional but useful:
+
+```toc
+## Version: @project-version@
+```
+
+Then the packager sets Version from the git tag (`v0.2.20` → `0.2.20`). If you keep a hard-coded `## Version:`, bump it yourself before tagging.
+
+6. Commit `.pkgmeta`, the workflow, and the TOC line; push to `main` / `master`.
+
+### Every release after that
+
+```bash
+# on the SnapPostForever GitHub repo, after changelog + commit
+git tag v0.2.20
+git push origin v0.2.20
+```
+
+GitHub Actions runs `BigWigsMods/packager@v2`, which:
+
+1. Builds a clean `SnapPostForever/` zip (no `docs/`, no `.github/`)
+2. Attaches it to a **GitHub Release** for that tag
+3. Uploads the same zip to **CurseForge** using `CF_API_KEY` + `X-Curse-Project-ID`
+
+Dry-run locally (no upload):
+
+```bash
+curl -sSL https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh | bash -s -- -d
+```
+
+### What automation does *not* do
+
+- Does **not** upload logo / gallery images — keep Media tab updates manual (or CF web UI).
+- Does **not** create the CurseForge project for you.
+- Does **not** replace moderation on first publish.
+- Screenshots and description HTML stay author-portal content.
+
+Official upload API reference: https://support.curseforge.com/en/support/solutions/articles/9000197321-curseforge-upload-api
+
+---
+
+## 9. Assets ready in this repo
 
 | Asset | Path | Use |
 |-------|------|-----|
 | Publishing guide | `docs/CURSEFORGE.md` | This file |
 | Description draft | `docs/DESCRIPTION.md` | Project About text |
 | Logo 400×400 | `docs/branding/logo-400x400.png` | Project icon |
-| UI screenshots | `docs/screenshots/04`–`06` (+ older `01`–`03`) | Gallery (see captions) |
+| UI screenshots | `docs/screenshots/04`–`06` | Gallery (Classic Era new look) |
+| Packager meta | `.pkgmeta` | Zip include/exclude for CI |
+| Release workflow | `.github/workflows/release.yml` | Tag → CurseForge |
 | License | `LICENSE` | Project + zip |
-| Package script | `../scripts/package_snappost_forever.sh` | Release zip |
+| Manual package script | `../scripts/package_snappost_forever.sh` | Local zip without CI |
 
 ### Screenshots for the gallery
 
-Use the current set in `docs/screenshots/`:
+1. `04-mail-prompt-current.jpg` — mailbox send queue  
+2. `05-mapper-current-ui.jpg` — alt / profession mapper  
+3. `06-options-addons.jpg` — Settings → AddOns  
 
-1. `04-mail-prompt-current.jpg`
-2. `05-mapper-current-ui.jpg`
-3. `06-options-addons.jpg`
-
-Optional: minimap button + mapper open if you want a fourth gallery image.
+Upload these on **Images / Media**, not inside the release zip.

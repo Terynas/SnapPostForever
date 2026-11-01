@@ -19,17 +19,17 @@ SavedVariables: `SnapPostForeverDB` (does not share maps with any legacy `SnapPo
 
 ## Commands
 
-| Command                             | Action                                |
-| ----------------------------------- | ------------------------------------- |
-| `/spostf`                           | Open mapper with the options          |
-| `/spostf options`                   | Options → AddOns                      |
-| `/spostf minimap`                   | Show / hide minimap icon              |
-| `/spostf de <Char-Realm>`           | DE greens target (`clear` to remove)  |
-| `/spostf scan`                      | Save this character’s professions     |
-| `/spostf bags`                      | Mail plan (mailbox open to send)      |
-| `/spostf delay N`                   | Seconds between sends                 |
-| `/spostf reset`                     | Clear maps (keeps scanned characters) |
-| `/spostf setmail Char-Realm - Name` | Exact mailbox **To** text             |
+| Command | Action |
+|---------|--------|
+| `/spostf` | Open mapper |
+| `/spostf options` | Options → AddOns |
+| `/spostf minimap` | Show / hide minimap icon |
+| `/spostf de <Char-Realm>` | DE greens target (`clear` to remove) |
+| `/spostf scan` | Save this character’s professions |
+| `/spostf bags` | Mail plan (mailbox open to send) |
+| `/spostf delay N` | Seconds between sends |
+| `/spostf reset` | Clear maps (keeps scanned characters) |
+| `/spostf setmail Char-Realm - Name` | Exact mailbox **To** text |
 
 Also accepts `/snappostf` and `/snappost`.
 

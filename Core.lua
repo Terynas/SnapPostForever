@@ -1,7 +1,13 @@
 local addonName, ns = ...
 
 ns.addonName = addonName
-ns.version = "0.2.23"
+local GetMetadata = (C_AddOns and C_AddOns.GetAddOnMetadata) or GetAddOnMetadata
+local tocVersion = GetMetadata and GetMetadata(addonName, "Version")
+-- The packager replaces @project-version@ in the TOC with the tag; git checkouts keep the token.
+if not tocVersion or tocVersion:find("@", 1, true) then
+    tocVersion = "dev"
+end
+ns.version = tocVersion:gsub("^v", "")
 ns.PRINT_PREFIX = "|cffc9a227[SnapPost Forever]|r "
 
 ns.Materials = ns.Materials or {}

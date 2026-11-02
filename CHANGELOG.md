@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - BigWigs Packager kit: `.pkgmeta` + `.github/workflows/release.yml` so a `v*` tag can build the zip and upload to CurseForge; setup steps in `docs/CURSEFORGE.md`.
 - CurseForge project id in TOC is digits-only (`1753123`). Do not use a GitHub→CurseForge package webhook for releases.
 - CurseForge `docs/DESCRIPTION.md` rewritten for Forever + Classic Era + Midnight dual/triple-ship.
-- The tag release workflow now fails if `## Version` in the TOC or `ns.version` in `Core.lua` does not match the tag.
+- The addon version now comes from the release tag: the TOC uses `@project-version@` and the in-game version is read from the TOC (`dev` in unpackaged git checkouts).
 
 ### Fixed
 

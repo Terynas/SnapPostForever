@@ -4,7 +4,7 @@
 ## Notes: Map profession materials across your characters and queue mailbox sends with safe delays (Forever, Classic Era + Midnight).
 ## Notes-Mainline: Map profession materials across your Battle.net characters and queue mailbox sends with safe delays.
 ## Author: Terynas
-## Version: 0.2.23
+## Version: @project-version@
 ## SavedVariables: SnapPostForeverDB
 ## IconTexture: Interface\Icons\INV_Letter_15
 ## Category: Mail

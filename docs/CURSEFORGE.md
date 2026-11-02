@@ -152,7 +152,7 @@ Moderation can take hours to a few days. Respond politely in Author messages if 
 ## 7. Recurring release workflow (manual)
 
 1. Ship code + update `CHANGELOG.md` under `[Unreleased]`, then move bullets into a dated section when you cut a version.
-2. Bump `## Version` in `SnapPostForever.toc` and `ns.version` in `Core.lua` to the tag's version. The release workflow fails if either does not match the `v*` tag.
+2. No version bump needed: the TOC uses `## Version: @project-version@`, which the packager fills from the `v*` tag, and `Core.lua` reads it from the TOC. Unpackaged git checkouts show version `dev`.
 3. Either:
    - **Manual:** `./scripts/package_snappost_forever.sh` from the WoWAddons workspace root → upload `dist/SnapPostForever-<version>.zip` on CurseForge, **or**
    - **Automatic:** push a `v*` tag (see §8).

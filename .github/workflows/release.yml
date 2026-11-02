@@ -29,15 +29,11 @@ jobs:
             exit 1
           fi
 
-      - name: Require versions to match the tag
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Require TOC version to come from the tag
         run: |
-          want="${GITHUB_REF_NAME#v}"
           toc="$(grep -E '^## Version:' SnapPostForever.toc | awk '{print $3}')"
-          core="$(sed -nE 's/^ns\.version = "([^"]+)".*/\1/p' Core.lua)"
-          echo "tag=${want} toc=${toc} core=${core}"
-          if [[ "${toc}" != "${want}" || "${core}" != "${want}" ]]; then
-            echo "Bump ## Version in SnapPostForever.toc and ns.version in Core.lua to ${want} before tagging." >&2
+          if [[ "${toc}" != "@project-version@" ]]; then
+            echo "SnapPostForever.toc must use '## Version: @project-version@' (got: '${toc}')" >&2
             exit 1
           fi
 

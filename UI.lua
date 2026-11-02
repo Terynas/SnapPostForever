@@ -358,6 +358,7 @@ local function EnsureMapper()
     f:SetPoint("CENTER")
     ApplyWindow(f)
     f:SetMovable(true)
+    f:SetClampedToScreen(true)
     f:EnableMouse(true)
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function(self)
@@ -1492,6 +1493,13 @@ local function EnsureMailPrompt()
     f:SetFrameStrata("FULLSCREEN_DIALOG")
     f:EnableMouse(true)
     f:Hide()
+    tinsert(UISpecialFrames, "SnapPostForeverMailPrompt")
+    -- Esc hides the frame directly; stop the queue so it never sends with the prompt closed.
+    f:SetScript("OnHide", function()
+        if ns.MailQueue and ns.MailQueue:IsActive() then
+            ns.MailQueue:Cancel("closed by user")
+        end
+    end)
 
     f.title = f:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     f.title:SetPoint("TOP", 0, -18)
@@ -1797,9 +1805,9 @@ function UI:IsMailboxOpen()
     if SendMailFrame and SendMailFrame:IsShown() then
         return true
     end
-    if C_PlayerInteractionManager and C_PlayerInteractionManager.IsInteractingWithNpc
+    if C_PlayerInteractionManager and C_PlayerInteractionManager.IsInteractingWithNpcOfType
         and Enum and Enum.PlayerInteractionType and Enum.PlayerInteractionType.MailInfo then
-        return C_PlayerInteractionManager.IsInteractingWith(Enum.PlayerInteractionType.MailInfo)
+        return C_PlayerInteractionManager.IsInteractingWithNpcOfType(Enum.PlayerInteractionType.MailInfo)
     end
     return false
 end

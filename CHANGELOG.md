@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - BigWigs Packager kit: `.pkgmeta` + `.github/workflows/release.yml` so a `v*` tag can build the zip and upload to CurseForge; setup steps in `docs/CURSEFORGE.md`.
 - CurseForge project id in TOC is digits-only (`1753123`). Do not use a GitHub→CurseForge package webhook for releases.
 
+### Fixed
+
+- The mailbox-open fallback check called interaction APIs that do not exist, so it never ran; it now uses `C_PlayerInteractionManager.IsInteractingWithNpcOfType`.
+- The mail prompt now closes with Esc (stopping any in-progress send, like the Close button).
+- The mapper window can no longer be dragged off screen.
+
 ## [0.2.19] - 2026-10-25
 
 ### Fixed

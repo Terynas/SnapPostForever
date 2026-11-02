@@ -1,7 +1,7 @@
 local addonName, ns = ...
 
 ns.addonName = addonName
-ns.version = "0.2.19"
+ns.version = "0.2.23"
 ns.PRINT_PREFIX = "|cffc9a227[SnapPost Forever]|r "
 
 ns.Materials = ns.Materials or {}

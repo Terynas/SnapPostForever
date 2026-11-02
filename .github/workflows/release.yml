@@ -29,6 +29,18 @@ jobs:
             exit 1
           fi
 
+      - name: Require versions to match the tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          want="${GITHUB_REF_NAME#v}"
+          toc="$(grep -E '^## Version:' SnapPostForever.toc | awk '{print $3}')"
+          core="$(sed -nE 's/^ns\.version = "([^"]+)".*/\1/p' Core.lua)"
+          echo "tag=${want} toc=${toc} core=${core}"
+          if [[ "${toc}" != "${want}" || "${core}" != "${want}" ]]; then
+            echo "Bump ## Version in SnapPostForever.toc and ns.version in Core.lua to ${want} before tagging." >&2
+            exit 1
+          fi
+
       - name: Package and upload
         uses: BigWigsMods/packager@v2
         env:

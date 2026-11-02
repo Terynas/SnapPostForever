@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.23] - 2026-11-02
+
 ### Added
 
 - Classic Era (1.15.x) support. The addon now loads on Classic Era with the same vanilla material catalog and profession list as WoW Forever, normal realm-style character names, and professions read from the Skills tab.
@@ -13,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - CurseForge gallery screenshots refreshed (`docs/screenshots/04`–`06`) with Classic Era mail prompt, mapper, and Options captures.
 - BigWigs Packager kit: `.pkgmeta` + `.github/workflows/release.yml` so a `v*` tag can build the zip and upload to CurseForge; setup steps in `docs/CURSEFORGE.md`.
 - CurseForge project id in TOC is digits-only (`1753123`). Do not use a GitHub→CurseForge package webhook for releases.
+- CurseForge `docs/DESCRIPTION.md` rewritten for Forever + Classic Era + Midnight dual/triple-ship.
+- The tag release workflow now fails if `## Version` in the TOC or `ns.version` in `Core.lua` does not match the tag.
 
 ### Fixed
 
